@@ -1,0 +1,279 @@
+/* Homework Questions editor — Gutenberg sidebar (Lesson / Week edit screen).
+   Scoped under .tfp-hw- so it never leaks into the editor canvas. */
+
+.tfp-hw-section {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.tfp-hw-title {
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.tfp-hw-help {
+    margin: 4px 0 8px;
+    color: #757575;
+    font-size: 12px;
+}
+
+.tfp-hw-count {
+    margin: 4px 0 8px;
+    font-size: 11px;
+    color: #757575;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.tfp-hw-empty {
+    margin: 6px 0 0;
+    font-size: 12px;
+    color: #757575;
+    font-style: italic;
+}
+
+/* Add + picker ------------------------------------------------ */
+.tfp-hw-add-btn,
+.tfp-hw-type-btn {
+    display: block;
+    width: 100%;
+    justify-content: center;
+    margin: 4px 0;
+}
+
+.tfp-hw-type-btn {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 10px;
+    height: auto;
+    line-height: 1.35;
+    text-align: left;
+}
+
+.tfp-hw-type-btn-title {
+    font-weight: 600;
+}
+
+.tfp-hw-type-btn-desc {
+    font-size: 11px;
+    opacity: 0.75;
+}
+
+.tfp-hw-picker-label {
+    margin: 2px 0 6px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.tfp-hw-cancel-link {
+    display: block;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2px;
+    color: #757575;
+}
+
+/* Cards ------------------------------------------------------- */
+.tfp-hw-list {
+    margin-top: 10px;
+}
+
+.tfp-hw-card {
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background: #fff;
+}
+
+.tfp-hw-card--open {
+    border-color: #0073aa;
+    box-shadow: 0 0 0 1px #0073aa;
+}
+
+.tfp-hw-card--locked .tfp-hw-card-head {
+    opacity: 0.7;
+}
+
+.tfp-hw-card-head {
+    padding: 8px 10px;
+    cursor: pointer;
+}
+
+.tfp-hw-card-head:hover {
+    background: #f6f7f7;
+}
+
+.tfp-hw-card--open .tfp-hw-card-head {
+    padding-bottom: 0;
+}
+
+.tfp-hw-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.tfp-hw-card-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: auto;
+}
+
+.tfp-hw-icon-btn {
+    min-width: 26px;
+    height: 26px;
+    padding: 0 4px !important;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.tfp-hw-del {
+    color: #b32d2e;
+}
+
+.tfp-hw-card-preview {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+    color: #1d2327;
+    word-break: break-word;
+}
+
+.tfp-hw-card-meta {
+    margin-top: 2px;
+    font-size: 11px;
+    color: #757575;
+}
+
+.tfp-hw-del-confirm {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+}
+
+.tfp-hw-del-text {
+    color: #b32d2e;
+}
+
+.tfp-hw-del-yes,
+.tfp-hw-del-no {
+    min-width: auto;
+    height: 26px;
+    padding: 0 8px !important;
+}
+
+.tfp-hw-del-yes {
+    color: #fff;
+    background: #b32d2e;
+}
+
+/* Editor card -------------------------------------------------- */
+.tfp-hw-badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #1e1e1e;
+    background: #f0f0f1;
+}
+
+.tfp-hw-badge--multiple_choice {
+    background: #e7eef9;
+    color: #1d4e89;
+}
+
+.tfp-hw-badge--written {
+    background: #eef7ec;
+    color: #2c6b33;
+}
+
+.tfp-hw-badge--both {
+    background: #fbf3e1;
+    color: #7a5a00;
+}
+
+.tfp-hw-new-label {
+    margin-left: 6px;
+    font-size: 11px;
+    color: #0073aa;
+    font-style: italic;
+}
+
+.tfp-hw-card--open > .components-base-control,
+.tfp-hw-card--open .tfp-hw-editor-body,
+.tfp-hw-card--open .tfp-hw-option-row,
+.tfp-hw-card--open .components-select-control__input {
+    width: 100%;
+}
+
+.tfp-hw-card--open {
+    padding: 4px 10px 10px;
+}
+
+.tfp-hw-options-label {
+    display: block;
+    margin: 10px 0 0;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #50575e;
+}
+
+.tfp-hw-options-hint {
+    margin: 4px 0 8px;
+    font-size: 11px;
+    color: #757575;
+}
+
+.tfp-hw-option-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.tfp-hw-option-row .components-base-control {
+    flex: 1;
+    min-width: 0;
+    margin-bottom: 6px;
+}
+
+.tfp-hw-remove-opt {
+    flex: 0 0 auto;
+    min-width: 30px;
+    height: 30px;
+    padding: 0 !important;
+    justify-content: center;
+    margin-bottom: 8px;
+    color: #b32d2e;
+    font-size: 16px;
+}
+
+.tfp-hw-add-opt {
+    margin: 2px 0 8px;
+}
+
+.tfp-hw-error {
+    margin: 6px 0 8px;
+    padding: 6px 8px;
+    border-left: 3px solid #b32d2e;
+    background: #fcf0f1;
+    color: #b32d2e;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.tfp-hw-editor-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+}

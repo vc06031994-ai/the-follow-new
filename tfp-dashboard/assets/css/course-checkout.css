@@ -1,0 +1,781 @@
+/**
+ * Program (course) checkout — modal-specific styling.
+ *
+ * Loaded on the dashboard Home template AFTER checkout.css. The wizard
+ * internals (form rows, method grid, order-summary, totals, Stripe fields)
+ * are reused verbatim from checkout.css; this file only adds:
+ *   - the modal size variants + close button + scroll behaviour
+ *   - the Browse-Cohorts list / rows / acknowledgement
+ *   - the Home program card + enrollment status badges
+ *   - a handful of course-specific summary / FA / step-header bits
+ *
+ * Design tokens (teal / maroon / gold / radius / fonts) come from
+ * dashboard.css + checkout.css :root — never redefined here.
+ */
+
+/* Lock background scroll while a modal is open. */
+body.tfp-course-modal-open {
+    overflow: hidden;
+}
+
+/* -------------------------------------------------------------------------
+ * Modal shell — size variants + close button
+ * ---------------------------------------------------------------------- */
+
+.tfp-course-modal .tfp-dash-modal__box {
+    max-height: 92vh;
+    overflow-y: auto;
+}
+
+.tfp-dash-modal__box--wide {
+    max-width: 720px;
+    background:#DEE2E2 !important;
+    padding: 20px !important;
+}
+
+.tfp-dash-modal__box--checkout {
+    max-width: 1080px;
+    padding: 22px 24px;
+}
+
+.tfp-modal-close {
+    position: absolute;
+    top: -1px;
+    right: 0px;
+    z-index: 2;
+    width: 34px !important;
+    height: 34px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    border: 0 !important;
+    background: transparent;
+    color: var(--tfp-dash-muted) !important;
+    font-size: 26px !important;
+    line-height: 1;
+    cursor: pointer !important;
+    border-radius: 8px !important;
+}
+
+.tfp-modal-close:hover {
+    background: transparent !important;
+    color: var(--tfp-dash-text) !important;
+}
+
+/* -------------------------------------------------------------------------
+ * Browse-Cohorts modal
+ * ---------------------------------------------------------------------- */
+
+.tfp-course-modal__head {
+    padding-right: 34px; /* keep the title clear of the close button */
+    padding-bottom: 12px;
+    border-bottom: 1px solid #c4c4c4;
+}
+
+.tfp-course-modal__lead {
+    margin: 6px 0 0;
+    color: var(--tfp-dash-text);
+    font-size: 12px;
+    line-height: 130%;
+}
+
+.tfp-cohorts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 46vh;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+.tfp-cohorts-loading,
+.tfp-cohorts-empty,
+.tfp-cohorts-error {
+    margin: 8px 0;
+    color: var(--tfp-dash-muted);
+    font-size: 14px;
+}
+
+.tfp-cohorts-error {
+    color: var(--tfp-dash-maroon);
+}
+
+.tfp-cohorts-inline-error {
+    margin: 0 0 4px;
+    padding: 10px 12px;
+    background: rgba(87, 5, 6, .08);
+    border: 1px solid rgba(87, 5, 6, .25);
+    border-radius: 8px;
+    color: var(--tfp-dash-maroon);
+    font-size: 13px;
+}
+
+.tfp-cohort-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px 18px;
+    border: 1px solid var(--tfp-dash-border);
+    border-radius: var(--tfp-dash-radius);
+    background: #fff;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.tfp-cohort-reserve.is-selected {
+    border-color: #C4C4C4 !important;
+    background: #C4C4C4 !important;
+    color: #ffffff !important
+
+}
+
+.tfp-cohort-row.is-full {
+    opacity: .6;
+}
+
+.tfp-cohort-row__main {
+    min-width: 0;
+}
+
+.tfp-cohort-row__name {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--tfp-dash-text);
+}
+
+.tfp-cohort-row__meta {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--tfp-dash-muted);
+    line-height: 1.45;
+}
+
+.tfp-cohort-row__seats {
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tfp-dash-teal);
+}
+
+.tfp-cohort-row__seats.is-full {
+    color: var(--tfp-dash-maroon);
+}
+
+.tfp-cohort-row__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+    text-align: right;
+}
+
+.tfp-cohort-row__price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--tfp-dash-text);
+}
+
+.tfp-cohort-row__price del {
+    color: var(--tfp-dash-muted);
+    font-weight: 500;
+    margin-right: 6px;
+}
+
+.tfp-cohort-ack {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--tfp-dash-muted);
+    cursor: pointer;
+}
+
+/* Visually-hidden native checkbox; the .tfp-cohort-ack__control span is the
+   painted control. The real <input> still takes focus/click through the
+   wrapping <label>, so this stays keyboard-accessible. */
+.tfp-cohort-ack input {
+    position: absolute;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.tfp-cohort-ack__control {
+    position: relative;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    border: 2px solid var(--tfp-dash-border);
+    border-radius: 50%;
+    background: #fff;
+    transition: border-color .15s ease, background-color .15s ease;
+}
+
+.tfp-cohort-ack__control::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform .15s ease;
+}
+
+.tfp-cohort-ack input:checked + .tfp-cohort-ack__control {
+    border-color: var(--tfp-dash-teal);
+    background: var(--tfp-dash-teal);
+}
+
+.tfp-cohort-ack input:checked + .tfp-cohort-ack__control::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.tfp-cohort-ack input:focus-visible + .tfp-cohort-ack__control {
+    outline: 2px solid var(--tfp-dash-teal);
+    outline-offset: 2px;
+}
+
+.tfp-cohort-ack__text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.tfp-cohort-ack__line {
+    color: var(--tfp-dash-text);
+    font-weight: 500;
+}
+
+.tfp-cohort-ack__terms {
+    color: var(--tfp-dash-teal);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.tfp-cohort-ack__note {
+    font-size: 12px;
+    color: var(--tfp-dash-muted);
+    display: none;
+}
+
+/* The "Acknowledged —" helper only makes sense once the box is ticked. */
+.tfp-cohort-ack input:checked ~ .tfp-cohort-ack__text .tfp-cohort-ack__note {
+    display: block;
+}
+
+.tfp-cohort-ack--error {
+    color: var(--tfp-dash-maroon);
+}
+
+.tfp-cohort-ack--error .tfp-cohort-ack__control {
+    border-color: var(--tfp-dash-maroon);
+    outline: 2px solid var(--tfp-dash-maroon);
+    outline-offset: 2px;
+}
+
+.tfp-cohort-ack--error .tfp-cohort-ack__line {
+    color: var(--tfp-dash-maroon);
+}
+
+.tfp-course-modal__foot {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    border-top: 1px solid var(--tfp-dash-border);
+    padding-top: 16px;
+}
+
+/* Cancel / Save footer buttons pair an inline SVG with their label. */
+.tfp-course-btn--icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tfp-course-btn--icon svg {
+    flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------------------
+ * Home program card (state-aware) + status badges
+ * ---------------------------------------------------------------------- */
+
+.tfp-program-card {
+    display: grid;
+    grid-template-columns: minmax(160px, 220px) 1fr;
+    gap: 24px;
+    align-items: stretch;
+    padding: 16px 20px;
+    border: 1px solid #C4C4C4;
+    border-radius: 12px;
+    background-color: #EBEBEB !important;
+}
+
+
+.tfp-program-card__visual {
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f0f0f0;
+    min-height: 180px;
+}
+
+.tfp-program-card__visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.tfp-program-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.tfp-program-card__topline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.tfp-program-card__meta {
+    margin: 0;
+    color: var(--tfp-dash-muted);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.tfp-program-card__title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--tfp-dash-text);
+}
+
+.tfp-program-card__desc {
+    margin: 0;
+    color: var(--tfp-dash-text);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.tfp-program-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.tfp-program-card__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 2px;
+}
+
+.tfp-program-card__details {
+    color: var(--tfp-dash-teal);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.tfp-program-card__details:hover {
+    text-decoration: underline;
+}
+
+.tfp-program-card__cancel {
+    background-color: #DEE2E2 !important;
+    border:1px solid #C4C4C4 !important;
+    color:#151411 !important
+}
+
+.tfp-program-card__cancel:hover {
+     background-color: transparent !important;
+}
+
+/* Status badge with a leading colored dot (matches the mockup). */
+.tfp-program-card__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    font-size: 16px;
+    line-height: 130%;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.tfp-program-card__badge::after {
+    content: '';
+    width: 24px;
+    height: 19px;
+    border-radius: 12px;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+.tfp-program-card__badge--unpaid::after{
+    background-color: #570506;
+}
+
+.tfp-program-card__badge--waitlisted::after{
+    background-color: #570506;
+}
+
+.tfp-program-card__badge--invited::after{
+    background-color: #BD9817;
+}
+
+.tfp-program-card__badge--enrolled::after{
+    background-color: #00666E;
+}
+.tfp-program-card__badge--unpaid {
+
+    color: #000000;
+}
+
+.tfp-program-card__badge--waitlisted {
+
+    color: #000000;
+}
+
+.tfp-program-card__badge--invited {   
+    color: #000000;
+}
+
+.tfp-program-card__badge--enrolled {
+    color: #000000;
+}
+
+@media (max-width: 720px) {
+    .tfp-program-card {
+        grid-template-columns: 1fr;
+    }
+
+    .tfp-program-card__visual {
+        min-height: 160px;
+    }
+}
+
+/* -------------------------------------------------------------------------
+ * Course-checkout modal internals
+ * ---------------------------------------------------------------------- */
+
+/* Neutralise the full-page wrapper padding/width inside the modal box. */
+.tfp-course-checkout.tfp-checkout-page-wrap {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tighter two-column split so the summary fits the modal width. */
+.tfp-course-checkout .tfp-checkout-layout {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 28px;
+}
+
+.tfp-course-checkout .tfp-checkout-title-header {
+    padding-right: 34px;
+}
+
+.tfp-course-checkout .tfp-checkout-page-title {
+    font-size: clamp(1.5rem, 2.4vw, 2rem) !important;
+}
+
+.tfp-course-checkout .tfp-checkout-subtitle {
+    font-size: 16px;
+    margin-bottom: 18px;
+}
+
+/* Gold section headers — shared by the book wizard's inline style, promoted
+   to a class so both checkouts read from one source. */
+.tfp-course-step-header {
+    color: #847230;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: var(--tfp-dash-font);
+    line-height: 1.3;
+}
+
+.tfp-course-step-subheader {
+    margin-top: 4px;
+    margin-bottom: 16px;
+    color: var(--tfp-dash-muted);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.tfp-course-pay-heading {
+    margin: 18px 0 14px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--tfp-dash-text);
+}
+
+.tfp-course-checkout-error {
+    min-height: 1em;
+    margin: 4px 0 0;
+    color: var(--tfp-dash-maroon);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* The footer "Place Order" is the pay button for card only; wallets render
+   their own button inside the payment panel. */
+.tfp-checkout-actions.hide-place-order #tfp-global-place-order {
+    display: none !important;
+}
+
+/* Summary — applied FA line */
+.tfp-course-fa-row span {
+    color: var(--tfp-dash-teal);
+}
+
+.tfp-course-fa-row strong {
+    color: var(--tfp-dash-teal);
+}
+
+/* -------------------------------------------------------------------------
+ * Order-Summary review view (View A of the checkout modal)
+ *
+ * Shown first after a seat is reserved: a 2-column "review" screen (cohort on
+ * the left, order summary on the right) that mirrors the Figma. "Continue to
+ * Payment" reveals the untouched Contact/Payment wizard (View B).
+ * ---------------------------------------------------------------------- */
+
+.tfp-course-review {
+    padding-top: 4px;
+}
+
+.tfp-course-review__grid {
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 380px);
+    gap: 28px;
+    align-items: start;
+}
+
+.tfp-course-review__left {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.tfp-course-review__left-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-bottom: 1px solid #c4c4c4;
+    padding-bottom: 12px;
+}
+
+.tfp-course-review__left-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--tfp-dash-text);
+}
+
+.tfp-course-review__left-description {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--tfp-dash-muted);
+}
+
+.tfp-review-cohort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px 18px;
+    border: 1px solid var(--tfp-dash-border);
+    border-radius: var(--tfp-dash-radius);
+    background: #fff;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+
+.tfp-review-cohort__empty {
+    margin: 0;
+    color: var(--tfp-dash-muted);
+    font-size: 14px;
+}
+
+.tfp-review-cohort__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tfp-dash-teal);
+    background: rgba(0, 102, 110, 0.08);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 10px;
+}
+
+.tfp-review-cohort__name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--tfp-dash-text);
+    line-height: 1.3;
+}
+
+.tfp-review-cohort__meta {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--tfp-dash-muted);
+    line-height: 1.45;
+}
+
+.tfp-review-change {
+    align-self: flex-end;
+    column-gap: 15px;
+}
+
+.tfp-review-change:hover {
+    color: var(--tfp-dash-maroon);
+}
+
+.tfp-course-review__summary {
+    background: #ffffff;
+    border: 1px solid #C4C4C4;
+    border-radius: 12px;
+    padding: 22px 18px 18px;
+}
+
+.tfp-course-review__summary h5 {
+    margin: 0;
+}
+
+.tfp-review-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--tfp-dash-border);
+}
+
+.tfp-review-product__img {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.tfp-review-product__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.tfp-review-product__copy {
+    flex: 1;
+    min-width: 0;
+}
+
+.tfp-review-product__name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--tfp-dash-text);
+    line-height: 130%;
+    overflow: hidden; 
+    width:100%;
+    display: -webkit-box; 
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.tfp-review-product__sub {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--tfp-dash-muted);
+}
+
+.tfp-review-product__price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--tfp-dash-text);
+    white-space: nowrap;
+}
+
+.tfp-review-totals {
+    margin-top: 16px;
+}
+
+.tfp-course-review-continue {
+    width: 100%;
+    /* margin-top: 18px; */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tfp-course-review-continue svg {
+    flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------------------
+ * Responsive
+ * ---------------------------------------------------------------------- */
+
+@media (max-width: 980px) {
+    .tfp-course-checkout .tfp-checkout-layout {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .tfp-course-review__grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+}
+
+@media (max-width: 620px) {
+    .tfp-dash-modal__box--checkout {
+        padding: 18px 16px;
+    }
+
+    .tfp-cohort-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .tfp-cohort-row__aside {
+        align-items: stretch;
+        text-align: left;
+    }
+
+    .tfp-course-modal__foot {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+}
+
+.tfp-course-pay-heading{
+margin-bottom: 20px !important;
+}

@@ -1,0 +1,6 @@
+.tfp-auth-register-field{margin-bottom:12px}
+.tfp-auth-register-field .tfp-label{display:block;margin-bottom:4px;font-weight:600}
+.tfp-auth-register-field .tfp-input,.tfp-auth-register-field .tfp-select{width:100%;max-width:100%}
+.tfp-auth-register-field .tfp-auth-checkbox{display:flex;align-items:flex-start;gap:12px;font-weight:400;flex-direction:row}
+.tfp-auth-register-field .tfp-auth-checkbox input[type="checkbox"]{margin:4px 0 0 0;transform:scale(1.15);width:18px;height:18px;flex:0 0 18px}
+.tfp-auth-register-field .tfp-auth-checkbox{line-height:1.4;color:inherit;font-size:15px;margin:0}

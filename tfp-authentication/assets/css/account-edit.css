@@ -1,0 +1,82 @@
+/* Inline Editing Forms */
+.tfp-profile-section__edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-top: 0.5rem;
+}
+
+.tfp-ac-edit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.tfp-ac-edit-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.tfp-ac-edit-row label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #444;
+}
+
+.tfp-ac-edit-row input[type="text"] {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    background: #fdfdfd;
+    transition: border-color 0.2s;
+}
+
+.tfp-ac-edit-row input[type="text"]:focus {
+    outline: none;
+    border-color: #00666e;
+    background: #fff;
+}
+
+.tfp-ac-edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.tfp-auth-btn--secondary {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.tfp-auth-btn--secondary:hover {
+    background: #e4e4e4;
+}
+
+.tfp-status-msg {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-left: auto;
+}
+
+@media (max-width: 600px) {
+    .tfp-ac-edit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tfp-ac-edit-actions {
+        flex-wrap: wrap;
+    }
+
+    .tfp-status-msg {
+        width: 100%;
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,92 @@
+.tfp-syllabus-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 130%;
+    font-family: "Eudoxus Sans", Sans-serif;
+}
+
+.tfp-syllabus-accordion {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.tfp-syllabus-item {
+    background: #DEE2E2; /* Light grey background from Figma */
+    margin-bottom: 10px; /* Gap between items */
+    overflow: hidden;
+}
+
+.tfp-syllabus-header {
+    width: 100%;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-weight: 700;
+    font-size: 15px;
+    color: #151411;
+    transition: all 0.2s;
+    text-transform: capitalize; /* Figma uses Title Case */
+}
+
+.tfp-syllabus-header:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.tfp-syllabus-item.is-active .tfp-syllabus-header {
+    background: transparent;
+}
+
+.tfp-syllabus-icon {
+    transition: transform 0.3s;
+    color: #00666E; /* Dark arrow */
+    display: flex;
+    align-items: center;
+    transform: rotate(-90deg); /* Default to right chevron */
+}
+
+.tfp-syllabus-item.is-active .tfp-syllabus-icon {
+    transform: rotate(0deg); /* Point down when active */
+}
+
+.tfp-syllabus-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: transparent;
+}
+
+.tfp-syllabus-item.is-active .tfp-syllabus-body {
+    max-height: 2000px;
+    transition: max-height 0.5s ease-in;
+}
+
+.tfp-syllabus-content {
+    padding: 0 20px 20px 20px; /* No top padding to keep it close to header */
+}
+
+.tfp-syllabus-lessons-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tfp-syllabus-lessons-list li {
+    position: relative;
+    padding-left: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #3C3C43D9;
+    line-height: 130%;
+    font-weight: 400; /* Normal weight for lessons */
+}
+
+.tfp-syllabus-lessons-list li:last-child {
+    margin-bottom: 0;
+}

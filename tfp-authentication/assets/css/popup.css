@@ -1,0 +1,7 @@
+.tfp-popup{background:#fff;border-radius:15px;padding:30px;max-width:640px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.18)}
+.tfp-popup-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tfp-popup-logo{height:36px}
+.tfp-popup-body{padding-top:16px}
+.tfp-popup-footer{padding-top:18px}
+.tfp-popup-close{background:transparent;border:0;font-size:20px;cursor:pointer}
+@media(max-width:600px){.tfp-popup{padding:20px;border-radius:10px}}

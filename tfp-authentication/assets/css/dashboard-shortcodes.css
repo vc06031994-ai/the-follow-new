@@ -1,0 +1,124 @@
+/* TFP Dashboard Shortcodes — styles for the Elementor dashboard data widgets. */
+
+.tfp-dash-avatar {
+    border-radius: 50% !important;
+    display: block !important;
+    object-fit: cover !important;
+}
+
+/* Progress bar */
+
+.tfp-dash-progress {
+    width: 100% !important;
+    height: 10px !important;
+    background: rgba(0, 0, 0, .08) !important;
+    border-radius: 999px !important;
+    overflow: hidden !important;
+}
+
+.tfp-dash-progress__bar {
+    height: 100% !important;
+    width: 0 !important;
+    background: #00666E !important;
+    border-radius: 999px !important;
+    transition: width .4s ease !important;
+}
+
+/* Buttons */
+
+.tfp-dash-logout-btn,
+.tfp-dash-profile-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-family: 'Eudoxus Sans', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: background .15s ease, color .15s ease !important;
+}
+
+.tfp-dash-profile-btn {
+    background: #00666E !important;
+    color: #fff !important;
+}
+
+.tfp-dash-profile-btn:hover,
+.tfp-dash-profile-btn:focus-visible {
+    background: #00505a !important;
+    color: #fff !important;
+}
+
+.tfp-dash-logout-btn {
+    background: transparent !important;
+    color: #d9534f !important;
+    border: 1px solid #d9534f !important;
+}
+
+.tfp-dash-logout-btn:hover,
+.tfp-dash-logout-btn:focus-visible {
+    background: #d9534f !important;
+    color: #fff !important;
+}
+
+/* Completion card */
+
+.tfp-dash-card {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    padding: 20px !important;
+    border-radius: 14px !important;
+    background: #fff !important;
+    border: 1px solid rgba(0, 0, 0, .06) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .06) !important;
+    font-family: 'Eudoxus Sans', sans-serif !important;
+}
+
+.tfp-dash-card__header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+}
+
+.tfp-dash-card__name {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #151411 !important;
+}
+
+.tfp-dash-card__percent {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #00666E !important;
+}
+
+.tfp-dash-card .tfp-dash-profile-btn {
+    align-self: flex-start !important;
+}
+
+/* Sets each progress bar's fill width from its data attribute without
+   requiring inline style="" or JS — kept minimal via attribute selectors
+   for common 5% steps; falls back gracefully otherwise. */
+.tfp-dash-progress__bar[data-tfp-progress="0"]   { width: 0% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="10"]  { width: 10% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="15"]  { width: 15% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="17"]  { width: 17% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="20"]  { width: 20% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="25"]  { width: 25% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="33"]  { width: 33% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="34"]  { width: 34% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="40"]  { width: 40% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="50"]  { width: 50% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="60"]  { width: 60% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="67"]  { width: 67% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="75"]  { width: 75% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="80"]  { width: 80% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="83"]  { width: 83% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="90"]  { width: 90% !important; }
+.tfp-dash-progress__bar[data-tfp-progress="100"] { width: 100% !important; }

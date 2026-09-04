@@ -1,0 +1,790 @@
+/* =========================================================================
+   TFP Dashboard — Core Shell
+   Sidebar (offcanvas + collapsible), layout, page header, cards, buttons.
+   ========================================================================= */
+
+:root {
+    --tfp-dash-teal: #00666E;
+    --tfp-dash-teal-dark: #00505A;
+    --tfp-dash-maroon: #570506;
+    --tfp-dash-text: #151411;
+    --tfp-dash-muted: #2E2E2E;
+    --tfp-dash-border: rgba(0, 0, 0, .08);
+    --tfp-dash-bg: #FFFFFF;
+    --tfp-dash-bg-soft: #EFEFEF;
+    --tfp-dash-sidebar-width: 240px;
+    --tfp-dash-sidebar-collapsed: 76px;
+    --tfp-dash-radius: 12px;
+    --tfp-dash-font: 'Eudoxus Sans', sans-serif;
+    --tfp-dash-font-alt: 'Lora', sans-serif;
+}
+
+html,
+body.tfp-dashboard-body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--tfp-dash-bg);
+    font-family: var(--tfp-dash-font);
+    color: var(--tfp-dash-text);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+p {
+    font-family: var(--tfp-dash-font-alt);
+}
+
+.tfp-dashboard {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    /* only the sidebar nav and the main panel scroll, not the whole page */
+}
+
+/* ---------------------------------------------------------------------
+   Sidebar
+   --------------------------------------------------------------------- */
+
+.tfp-dash-sidebar {
+    width: var(--tfp-dash-sidebar-width);
+    flex: 0 0 var(--tfp-dash-sidebar-width);
+    height: 100vh;
+    background: #fff;
+    border-right: 3px solid var(--tfp-dash-maroon);
+    display: flex;
+    flex-direction: column;
+    padding: 16px 14px;
+    transition: width .2s ease, flex-basis .2s ease, transform .25s ease;
+    position: relative;
+    z-index: 50;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tfp-dash-sidebar__top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.tfp-dash-sidebar__toggle {
+    background: transparent;
+    border: 0 !important;
+    color: var(--tfp-dash-maroon) !important;
+    cursor: pointer !important;
+    border-radius: 6px !important;
+    display: inline-flex !important;
+}
+
+.tfp-dash-sidebar__toggle:hover,
+.tfp-dash-sidebar__toggle:focus {
+    background: var(--tfp-dash-bg-soft) !important;
+}
+
+.tfp-dash-sidebar__brand {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px 20px;
+}
+
+.tfp-dash-sidebar__logo {
+    display: block;
+    max-height: 40px;
+    width: auto;
+}
+
+.tfp-dash-sidebar__logo--collapsed {
+    display: none;
+}
+
+.tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar__logo--expanded {
+    display: none;
+}
+
+.tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar__logo--collapsed {
+    display: block;
+    max-height: 32px;
+    margin: 0 auto;
+}
+
+.tfp-dash-sidebar__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.tfp-dash-sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+
+    color: var(--tfp-dash-text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--tfp-dash-bg-soft);
+    transition: background .15s ease, color .15s ease;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.tfp-dash-sidebar__link+.tfp-dash-sidebar__link {
+    margin-top: 2px;
+}
+
+.tfp-dash-sidebar__link:hover {
+    background: var(--tfp-dash-teal);
+    color: #fff;
+}
+
+.tfp-dash-sidebar__link.is-active {
+    background: var(--tfp-dash-teal);
+    color: #fff;
+}
+
+.tfp-dash-sidebar__icon {
+    display: inline-flex;
+    flex: 0 0 18px;
+}
+
+.tfp-dash-sidebar__footer {
+    border-top: 1px solid var(--tfp-dash-border);
+    padding-top: 14px;
+    margin-top: 14px;
+}
+
+.tfp-dash-sidebar__profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px 14px;
+}
+
+.tfp-dash-sidebar__avatar img {
+    border-radius: 50%;
+    display: block;
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+}
+
+.tfp-dash-sidebar__profile-text {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.tfp-dash-sidebar__name {
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 130%;
+}
+
+.tfp-dash-sidebar__role {
+    font-size: 12px;
+    color: var(--tfp-dash-muted);
+    line-height: 130%;
+}
+
+.tfp-dash-sidebar__logout {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 12px;
+
+    background: var(--tfp-dash-teal);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.tfp-dash-sidebar__logout:hover {
+    background: var(--tfp-dash-teal-dark);
+    color: #fff;
+}
+
+/* Collapsed (desktop icon-only) state */
+.tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar {
+    width: var(--tfp-dash-sidebar-collapsed);
+    flex-basis: var(--tfp-dash-sidebar-collapsed);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar__label,
+.tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar__profile-text {
+    display: none;
+}
+
+.tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar__brand {
+    justify-content: center;
+}
+
+.tfp-dash-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .35);
+    z-index: 40;
+}
+
+/* Mobile: true offcanvas — hidden off-screen until toggled */
+@media (max-width: 991px) {
+
+
+    .tfp-dash-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        width: 260px;
+        flex-basis: 260px;
+        box-shadow: 8px 0 24px rgba(0, 0, 0, .12);
+    }
+
+    .tfp-dashboard.is-sidebar-open .tfp-dash-sidebar {
+        transform: translateX(0);
+    }
+
+    .tfp-dashboard.is-sidebar-open .tfp-dash-overlay {
+        display: block;
+    }
+
+    .tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar {
+        width: 260px;
+        flex-basis: 260px;
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar__label,
+    .tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar__profile-text {
+        display: inline;
+    }
+
+    .tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar__logo--expanded {
+        display: block;
+    }
+
+    .tfp-dashboard.is-sidebar-collapsed .tfp-dash-sidebar__logo--collapsed {
+        display: none;
+    }
+}
+
+/* ---------------------------------------------------------------------
+   Main content
+   --------------------------------------------------------------------- */
+
+.tfp-dash-main {
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 28px 36px 60px;
+}
+
+/* When the week view needs a full-width header without the sidebar */
+.tfp-no-sidebar .tfp-dash-sidebar {
+    display: none;
+}
+
+/* .tfp-no-sidebar .tfp-dash-main {
+    padding-left: 60px;
+} */
+
+
+.tfp-dash-pageheader {
+    position: relative;
+    border-bottom: 3px solid var(--tfp-dash-maroon);
+    padding-bottom: 18px;
+    margin-bottom: 24px;
+}
+
+.tfp-dash-pageheader__mobile-toggle {
+    display: none !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: var(--tfp-dash-maroon);
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+@media (max-width:991px) {
+    .tfp-dash-pageheader__mobile-toggle {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.tfp-dash-pageheader__crumb {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: var(--tfp-dash-muted);
+}
+
+.tfp-dash-pageheader__crumb a {
+    color: var(--tfp-dash-teal);
+    text-decoration: none;
+}
+
+.tfp-dash-pageheader__crumb span[aria-hidden] {
+    margin: 0 6px;
+}
+
+.tfp-dash-pageheader__title {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0 0 8px;
+    line-height: 1.15;
+}
+
+.tfp-dash-pageheader__subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 180%;
+    color: var(--tfp-dash-muted);
+    margin: 0;
+}
+
+.tfp-dash-section__hi {
+    font-size: 26px !important;
+    margin: 0 0 6px;
+}
+
+.tfp-dash-section{
+    margin-top: 30px;
+}
+
+
+.tfp-dash-section__lead {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 180%;
+    color: var(--tfp-dash-muted);
+    margin: 0 0 22px;
+}
+
+/* ---------------------------------------------------------------------
+   Cards / buttons / progress rings (shared across pages)
+   --------------------------------------------------------------------- */
+
+.tfp-dash-panel {
+    background: #fff;
+    border: 1px solid var(--tfp-dash-border);
+    border-radius: var(--tfp-dash-radius);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
+}
+
+.tfp-dash-taskcards {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.tfp-dash-taskcard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 26px 30px;
+}
+
+.tfp-dash-taskcard__title {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 6px;
+}
+
+.tfp-dash-taskcard__label {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--tfp-dash-text);
+    margin: 0 0 8px;
+}
+
+.tfp-dash-taskcard__desc {
+    font-size: 12px;
+    color: var(--tfp-dash-muted);
+    margin: 0 0 18px;
+    line-height: 130%;
+}
+
+.tfp-dash-taskcard__ring {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.tfp-dash-taskcard__ring-label {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--tfp-dash-muted);
+    margin-top: 4px;
+}
+
+.tfp-dash-ring__track {
+    stroke: #E9E9E9;
+}
+
+.tfp-dash-ring__progress {
+    stroke: var(--tfp-dash-maroon);
+    stroke-linecap: round;
+}
+
+.tfp-dash-ring__label {
+    font-size: 16px;
+    font-weight: 800;
+    fill: var(--tfp-dash-text);
+    font-family: var(--tfp-dash-font);
+}
+
+.tfp-dash-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 12px 35px !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-family: var(--tfp-dash-font) !important;
+    line-height: 130%;
+}
+
+
+
+.tfp-dash-btn--primary {
+    background: var(--tfp-dash-teal) !important;
+    color: #fff !important;
+    border-color: var(--tfp-dash-teal) !important;
+}
+
+.tfp-dash-btn--primary:hover {
+    background: transparent !important;
+    color: var(--tfp-dash-teal) !important;
+}
+.tfp-dash-btn--primary[type="button"][type="submit"]{
+     background: transparent !important;
+    color: var(--tfp-dash-teal) !important;
+}
+.tfp-dash--secondary {
+    background: transparent;
+    color: var(--tfp-dash-text) !important;
+    padding: 0 !important;
+    border: 0 !important;
+
+}
+
+.tfp-dash--secondary:hover {
+    color: var(--tfp-dash-teal) !important;
+    background-color: transparent !important;
+}
+
+.tfp-dash-btn--outline {
+    background: #DEE2E2;
+    color: #151411;
+    border-color: #C4C4C4;
+}
+
+.tfp-dash-btn--outline:hover {
+    background: transparent;
+    color:#151411
+}
+
+.tfp-dash-badge {
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--tfp-dash-bg-soft);
+}
+
+.tfp-dash-badge--success {
+    background: rgba(0, 102, 110, .12);
+    color: var(--tfp-dash-teal);
+}
+
+/* Modal (base) — used by Communication's New Ticket and Financial Aid's
+   success confirmation. Context-specific button layouts live in their
+   own stylesheets. */
+
+.tfp-dash-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tfp-dash-modal[hidden] {
+    display: none;
+}
+
+.tfp-dash-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .4);
+}
+
+.tfp-dash-modal__box {
+    position: relative;
+    background: #fff;
+    border-radius: var(--tfp-dash-radius);
+    padding: 26px;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.tfp-dash-modal__box h6 {
+    margin: 0 0 4px;
+}
+
+/* Custom submission popup (matches theme) */
+.tfp-submission-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.tfp-submission-popup[hidden] {
+    display: none;
+}
+
+.tfp-submission-popup__box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 36px;
+    max-width: 480px;
+    width: 92%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    border-top: 6px solid #00666E;
+    text-align: center;
+    animation: tfpFadeIn 0.25s ease;
+}
+
+.tfp-submission-popup__box h3 {
+    margin: 0 0 14px;
+    font-size: 22px;
+    color: #151411;
+    font-weight: 800;
+}
+
+.tfp-submission-popup__box p {
+    margin: 0 0 24px;
+    font-size: 16px;
+    line-height: 160%;
+    color: #2E2E2E;
+    font-family: 'Lora', serif;
+}
+
+.tfp-submission-popup__box .tfp-dash-btn {
+    padding: 12px 36px !important;
+    font-size: 15px !important;
+}
+
+@media (max-width: 767px) {
+    .tfp-dash-main {
+        padding: 20px 16px 40px;
+    }
+
+    .tfp-dash-taskcard {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .tfp-dash-taskcard__ring {
+        align-self: center;
+    }
+
+    .tfp-dash-section__hi {
+        font-size: 20px !important;
+    }
+}
+
+.tfp-dash-form-card {
+    padding: 50px !important;
+    background-color: #EBEBEB;
+    border-radius: 12px;
+}
+
+@media (max-width: 767px) {
+    .tfp-dash-form-card {
+        padding: 20px !important;
+    }
+}
+
+/* =========================================================================
+   Home — paid "Class Journey" view (week circles, current lesson card)
+   ========================================================================= */
+
+.tfp-journey {
+    margin-bottom: 20px;
+}
+
+.tfp-journey__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+@media (max-width:767px){
+    .tfp-journey__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}
+
+.tfp-journey__header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.tfp-journey__header h3{
+    margin: 0;
+}
+
+.tfp-journey__legend {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.tfp-journey__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tfp-journey__meta {
+    font-size: 15px;
+    color: var(--tfp-dash-text, #151411);
+    margin-bottom: 24px;
+}
+
+.tfp-journey__circles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.tfp-journey__circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 700;
+    flex: 0 0 auto;
+}
+
+.tfp-journey__circle--small {
+    width: 14px;
+    height: 14px;
+    font-size: 0;
+}
+
+.tfp-journey__circle--complete {
+    background: var(--tfp-dash-teal);
+    color: #fff;
+}
+
+.tfp-journey__circle--current {
+    background: #B8860B;
+    color: #fff;
+}
+
+.tfp-journey__circle--upcoming {
+    background: var(--tfp-dash-bg-soft);
+    color: var(--tfp-dash-muted);
+    border: 1px solid var(--tfp-dash-border);
+}
+
+.tfp-journey__progressbar {
+    height: 8px;
+    background: var(--tfp-dash-bg-soft);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.tfp-journey__progressbar-fill {
+    height: 100%;
+    background: var(--tfp-dash-teal);
+    border-radius: 999px;
+    transition: width .4s ease;
+}
+
+.tfp-journey__progress-label-wrap {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--tfp-dash-text, #151411);
+}
+
+.tfp-journey__progress-label-right {
+    font-weight: 700;
+}
+
+.tfp-journey__current {
+    padding: 24px 26px;
+}
+
+.tfp-journey__current h3 {
+    font-size: 16px;
+    font-weight: 800;
+    margin: 0 0 6px;
+}
+
+.tfp-journey__current-title {
+    font-size: 14px;
+    color: var(--tfp-dash-muted);
+    margin: 0 0 16px;
+}
+
+/* Fixed footer */
+.tfp-dash-footer-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid var(--tfp-dash-border);
+    padding: 14px 36px;
+    z-index: 30;
+}

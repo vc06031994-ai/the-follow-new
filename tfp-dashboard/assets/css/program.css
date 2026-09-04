@@ -1,0 +1,211 @@
+/* =========================================================================
+   Program ("Continue Program") page — new components only. Journey, panel and
+   button styles already ship in dashboard.css; this file adds the stat tiles,
+   two-column layout, PAST DUE card, and Pending Tasks list, all built on the
+   existing design tokens.
+   ========================================================================= */
+
+/* Enrolled-only empty/notice state */
+.tfp-program-empty {
+    text-align: center;
+    padding: 40px 24px;
+}
+.tfp-program-empty h3 {
+    margin: 0 0 8px;
+    font-family: var(--tfp-dash-font-alt);
+    color: var(--tfp-dash-text);
+}
+.tfp-program-empty p {
+    color: var(--tfp-dash-muted);
+    margin: 0 0 20px;
+}
+
+/* --- Stat tiles ---------------------------------------------------------- */
+.tfp-stat-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+}
+.tfp-stat-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #EDEDED;
+    border-radius: var(--tfp-dash-radius);
+    padding: 18px 20px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+
+}
+.tfp-stat-tile__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--tfp-dash-bg-soft);
+    color: var(--tfp-dash-teal);
+    margin-bottom: 4px;
+}
+.tfp-stat-tile__icon svg {
+    width: 18px;
+    height: 18px;
+}
+.tfp-stat-tile__label {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 130%;
+    color: var(--tfp-dash-text);
+}
+.tfp-stat-tile__value {
+    font-family: var(--tfp-dash-font);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 130%;
+    color: var(--tfp-dash-text);
+}
+
+/* Card 1 - Lessons Completed */
+.tfp-stat-tile:nth-child(1) .tfp-stat-tile__value {
+    color: #00666E;
+}
+
+.tfp-journey__desc{
+    font-size:18px;
+    font-weight: 500;
+    line-height: 130%;
+    font-family: var(--tfp-dash-font-alt);
+    margin-bottom:20px
+}
+
+/* Card 3 - Overall Grade */
+.tfp-stat-tile:nth-child(3) .tfp-stat-tile__value {
+    color: #847230;
+}
+
+.tfp-stat-tile__sub {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 180%;
+    color: var(--tfp-dash-text);
+    word-break: break-word;
+    font-family: var(--tfp-dash-font-alt);
+}
+
+.tfp-tasks-panel{
+    padding: 24px 26px;
+}
+
+.tfp-journey__current-actions {
+    display: flex;
+    flex-direction:column;
+    gap: 20px;
+}
+
+/* --- Two-column body ----------------------------------------------------- */
+.tfp-program-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+.tfp-program-grid__main {
+    min-width: 0;
+}
+.tfp-program-grid__main > * {
+    margin-bottom: 24px;
+}
+.tfp-program-grid__main > *:last-child {
+    margin-bottom: 0;
+}
+
+/* --- PAST DUE card ------------------------------------------------------- */
+.tfp-pastdue-card {
+    border-left: 4px solid var(--tfp-dash-maroon);
+}
+.tfp-pastdue-card__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.tfp-pastdue-card__pill {
+    background: var(--tfp-dash-maroon);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+.tfp-pastdue-card__due {
+    font-size: 13px;
+    color: var(--tfp-dash-muted);
+}
+.tfp-pastdue-card__title {
+    margin: 0 0 16px;
+    font-family: var(--tfp-dash-font-alt);
+    font-size: 18px;
+    color: var(--tfp-dash-text);
+}
+
+/* --- Pending Tasks ------------------------------------------------------- */
+.tfp-tasks-panel__title {
+    margin: 0 0 16px;
+    font-family: var(--tfp-dash-font-alt);
+    font-size: 18px;
+    color: var(--tfp-dash-text);
+}
+.tfp-tasks-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.tfp-task-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--tfp-dash-bg-soft);
+    border-radius: 10px;
+}
+.tfp-task-row__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.tfp-task-row__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tfp-dash-text);
+}
+.tfp-task-row__meta {
+    font-size: 12px;
+    color: var(--tfp-dash-maroon);
+}
+.tfp-tasks-empty {
+    text-align: center;
+    color: var(--tfp-dash-muted);
+    padding: 20px 0;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .tfp-program-grid {
+        grid-template-columns: 1fr;
+    }
+    .tfp-stat-tiles {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 560px) {
+    .tfp-stat-tiles {
+        grid-template-columns: 1fr;
+    }
+}

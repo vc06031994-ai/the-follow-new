@@ -1,0 +1,354 @@
+/* =========================================================================
+   TFP Dashboard — Communication (chat / support tickets)
+   ========================================================================= */
+
+.tfp-dash-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.tfp-dash-stat {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.tfp-dash-stat__label {
+    font-size: 13px;
+    color: var(--tfp-dash-muted);
+}
+
+.tfp-dash-stat__value {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--tfp-dash-teal);
+}
+
+.tfp-dash-stat__value--amber {
+    color: #B8860B;
+}
+
+.tfp-dash-stat__sub {
+    font-size: 12px;
+    color: var(--tfp-dash-muted);
+}
+
+.tfp-dash-chatlayout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* Ticket list */
+
+.tfp-dash-ticketlist {
+    background: #fff;
+    border: 1px solid var(--tfp-dash-border);
+    border-radius: var(--tfp-dash-radius);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 640px;
+    overflow-y: auto;
+}
+
+.tfp-dash-ticketlist__search {
+    position: relative;
+}
+
+.tfp-dash-ticketlist__search input {
+    width: 100%;
+    padding: 9px 12px 9px 34px;
+    border-radius: 8px;
+    border: 1px solid var(--tfp-dash-border);
+    font-family: var(--tfp-dash-font);
+    font-size: 13px;
+}
+
+.tfp-dash-ticketlist__search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--tfp-dash-muted);
+}
+
+.tfp-dash-ticketlist__tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.tfp-dash-ticketlist__tabs button {
+    border: 1px solid var(--tfp-dash-border);
+    background: #fff;
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--tfp-dash-font);
+}
+
+.tfp-dash-ticketlist__tabs button.is-active {
+    background: var(--tfp-dash-teal);
+    color: #fff;
+    border-color: var(--tfp-dash-teal);
+}
+
+.tfp-dash-ticketlist__new {
+    width: 100%;
+}
+
+.tfp-dash-ticketlist__items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tfp-dash-ticketlist__empty {
+    font-size: 13px;
+    color: var(--tfp-dash-muted);
+    padding: 10px 4px;
+}
+
+.tfp-dash-ticketlist__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    font-family: var(--tfp-dash-font);
+}
+
+.tfp-dash-ticketlist__item:hover {
+    background: var(--tfp-dash-bg-soft);
+}
+
+.tfp-dash-ticketlist__item.is-active {
+    background: rgba(0, 102, 110, .1);
+    border-color: var(--tfp-dash-teal);
+}
+
+.tfp-dash-ticketlist__avatar img {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: block;
+    object-fit: cover;
+}
+
+.tfp-dash-ticketlist__meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 2px;
+}
+
+.tfp-dash-ticketlist__name {
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tfp-dash-ticketlist__category {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--tfp-dash-muted);
+}
+
+.tfp-dash-ticketlist__category--open { color: #B8860B; }
+.tfp-dash-ticketlist__category--pending { color: var(--tfp-dash-maroon); }
+.tfp-dash-ticketlist__category--resolved { color: var(--tfp-dash-teal); }
+
+.tfp-dash-ticketlist__preview {
+    font-size: 12px;
+    color: var(--tfp-dash-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Chat panel */
+
+.tfp-dash-chatpanel {
+    background: #fff;
+    border: 1px solid var(--tfp-dash-border);
+    border-radius: var(--tfp-dash-radius);
+    min-height: 640px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tfp-dash-chatpanel__empty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tfp-dash-muted);
+    font-size: 14px;
+}
+
+.tfp-dash-chatpanel__thread {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.tfp-dash-chatpanel__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--tfp-dash-border);
+}
+
+.tfp-dash-chatpanel__title {
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0 0 4px;
+}
+
+.tfp-dash-chatpanel__subtitle {
+    font-size: 12px;
+    color: var(--tfp-dash-muted);
+    margin: 0;
+}
+
+.tfp-dash-chatpanel__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tfp-dash-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--tfp-dash-bg-soft);
+}
+
+.tfp-dash-chatpanel__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tfp-dash-msg {
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.tfp-dash-msg--mine {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.tfp-dash-msg--theirs {
+    align-self: flex-start;
+    align-items: flex-start;
+}
+
+.tfp-dash-msg__bubble {
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.tfp-dash-msg--mine .tfp-dash-msg__bubble {
+    background: var(--tfp-dash-teal);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.tfp-dash-msg--theirs .tfp-dash-msg__bubble {
+    background: var(--tfp-dash-bg-soft);
+    color: var(--tfp-dash-text);
+    border-bottom-left-radius: 4px;
+}
+
+.tfp-dash-msg__time {
+    font-size: 11px;
+    color: var(--tfp-dash-muted);
+    padding: 0 4px;
+}
+
+.tfp-dash-chatpanel__reply {
+    display: flex;
+    gap: 10px;
+    padding: 16px 22px;
+    border-top: 1px solid var(--tfp-dash-border);
+}
+
+.tfp-dash-chatpanel__reply input {
+    flex: 1;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--tfp-dash-border);
+    font-family: var(--tfp-dash-font);
+    font-size: 14px;
+}
+
+/* New ticket modal — base .tfp-dash-modal / __backdrop / __box now live in
+   core dashboard.css; only ticket-specific form layout stays here. */
+
+.tfp-dash-modal__box label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.tfp-dash-modal__box input,
+.tfp-dash-modal__box select,
+.tfp-dash-modal__box textarea {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--tfp-dash-border);
+    font-family: var(--tfp-dash-font);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.tfp-dash-modal__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+@media (max-width: 900px) {
+    .tfp-dash-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .tfp-dash-chatlayout {
+        grid-template-columns: 1fr;
+    }
+
+    .tfp-dash-ticketlist {
+        max-height: 320px;
+    }
+}

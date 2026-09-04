@@ -1,0 +1,173 @@
+/* Login-state helper classes — pair with body.tfp-logged-in / body.tfp-logged-out.
+   Apply "tfp-guest-only" or "tfp-logged-in-only" as a CSS Class in Elementor's
+   Advanced tab on ANY widget/container (buttons, flexbox, shortcode widget). */
+body.tfp-logged-in .tfp-guest-only {
+    display: none !important;
+}
+
+body.tfp-logged-out .tfp-logged-in-only {
+    display: none !important;
+}
+
+/* TFP Account Menu — BEM: .tfp-account */
+
+.tfp-account {
+    position: relative !important;
+    display: inline-flex !important;
+    font-family: 'Eudoxus Sans', sans-serif !important;
+}
+
+.tfp-account__trigger {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 6px 10px !important;
+    border-radius: 999px !important;
+    cursor: pointer !important;
+    transition: background .15s ease !important;
+    font-family: inherit !important;
+}
+
+.tfp-account__trigger:hover,
+.tfp-account__trigger:focus-visible {
+    background: rgba(0, 102, 110, .08) !important;
+}
+
+.tfp-account__trigger:focus-visible {
+    outline: 2px solid #00666E !important;
+    outline-offset: 2px !important;
+}
+
+.tfp-account__avatar {
+    display: inline-flex !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    flex: 0 0 36px !important;
+}
+
+.tfp-account__avatar-img {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+.tfp-account__name {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #151411 !important;
+    max-width: 160px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.tfp-account__arrow {
+    display: inline-flex !important;
+    align-items: center !important;
+    color: #151411 !important;
+    transition: transform .15s ease !important;
+}
+
+.tfp-account.is-open .tfp-account__arrow {
+    transform: rotate(180deg) !important;
+}
+
+/* Dropdown */
+
+.tfp-account__dropdown {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 8px !important;
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    min-width: 200px !important;
+    background: #fff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .14) !important;
+    border: 1px solid rgba(0, 0, 0, .06) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-6px) !important;
+    transition: opacity .15s ease, transform .15s ease, visibility .15s ease !important;
+    z-index: 999 !important;
+}
+
+.tfp-account.is-open .tfp-account__dropdown {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+/* Desktop: allow hover to open in addition to click (JS) */
+@media (min-width: 1025px) {
+    .tfp-account:hover .tfp-account__dropdown {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+
+    .tfp-account:hover .tfp-account__arrow {
+        transform: rotate(180deg) !important;
+    }
+}
+
+.tfp-account__item {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.tfp-account__link {
+    display: block !important;
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #151411 !important;
+    text-decoration: none !important;
+    transition: background .12s ease, color .12s ease !important;
+}
+
+.tfp-account__link:hover,
+.tfp-account__link:focus-visible {
+    background: rgba(0, 102, 110, .08) !important;
+    color: #00666E !important;
+}
+
+.tfp-account__link:focus-visible {
+    outline: 2px solid #00666E !important;
+    outline-offset: -2px !important;
+}
+
+.tfp-account__item--logout .tfp-account__link {
+    color: #d9534f !important;
+    margin-top: 4px !important;
+    border-top: 1px solid rgba(0, 0, 0, .06) !important;
+    border-radius: 0 0 8px 8px !important;
+    padding-top: 12px !important;
+}
+
+.tfp-account__item--logout .tfp-account__link:hover,
+.tfp-account__item--logout .tfp-account__link:focus-visible {
+    background: #fdf2f2 !important;
+    color: #d9534f !important;
+}
+
+/* Mobile: click only (hover rules above are scoped to min-width: 1025px) */
+@media (max-width: 1024px) {
+    .tfp-account__name {
+        max-width: 110px !important;
+    }
+
+    .tfp-account__dropdown {
+        right: 0 !important;
+        left: auto !important;
+        min-width: 180px !important;
+    }
+}

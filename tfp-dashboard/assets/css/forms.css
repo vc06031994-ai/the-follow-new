@@ -1,0 +1,753 @@
+/* =========================================================================
+   TFP Dashboard — Forms (Billing / Financial Aid / Profile)
+   ========================================================================= */
+
+.tfp-dash-form-card {
+    padding: 26px 30px;
+}
+
+.tfp-dash-form-card h2 {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 6px;
+}
+
+.tfp-dash-form-card__lead {
+    font-size: 14px;
+    color: var(--tfp-dash-muted);
+    margin: 0 0 20px;
+}
+
+.tfp-dash-form__grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 30px;
+}
+
+.tfp-dash-form__photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.tfp-dash-form__photo img {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.tfp-dash-form__photo-upload {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--tfp-dash-teal);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.tfp-dash-form__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.tfp-dash-form__fields label,
+.tfp-dash-form__fields fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 180%;
+    font-family: var(--tfp-dash-font-alt);
+}
+
+.tfp-dash-form__fields fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.tfp-dash-form__fields legend {
+    padding: 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.tfp-dash-form__fields input[type="text"],
+.tfp-dash-form__fields input[type="email"],
+.tfp-dash-form__fields input[type="date"],
+.tfp-dash-form__fields input[type="file"],
+.tfp-dash-form__fields select,
+.tfp-dash-form__fields textarea {
+    padding: 11px 13px;
+    border-radius: 12px;
+    border: 1px solid var(--tfp-dash-border);
+    font-family: var(--tfp-dash-font);
+    font-size: 14px;
+    font-weight: 400;
+    background: #fff;
+}
+
+.tfp-dash-form__radio {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400 !important;
+    margin-right: 16px;
+}
+
+fieldset>.tfp-dash-form__radio {
+    display: inline-flex;
+}
+
+.tfp-dash-form__checkbox {
+    flex-direction: row !important;
+    align-items: flex-start;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    gap: 8px !important;
+}
+
+.tfp-dash-form__submit {
+    margin-top: 30px;
+}
+
+.tfp-dash-form__status {
+    font-size: 13px;
+    font-weight: 600;
+    min-height: 18px;
+}
+
+.tfp-dash-form__status[data-state="success"] {
+    color: var(--tfp-dash-teal);
+}
+
+.tfp-dash-form__status[data-state="error"] {
+    color: #B3261E;
+}
+
+/* Billing */
+
+.tfp-dash-billingcard {
+    display: grid;
+    grid-template-columns: minmax(180px, 260px) 1fr;
+    gap: 24px;
+    align-items: center;
+    padding: 24px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    background: #DEE2E2;
+    position: relative;
+}
+
+.tfp-dash-billingcard__visual {
+    overflow: hidden;
+    border-radius: 12px;
+    max-width: 240px;
+    min-height: 240px;
+    background: #f0f0f0;
+}
+
+@media (max-width:767px) {
+    .tfp-dash-billingcard__visual {
+        max-width: 100%;
+    }
+}
+
+.tfp-dash-billingcard__visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.tfp-dash-billingcard__content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.tfp-dash-billingcard__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.tfp-dash-billingcard__due-label {
+    font-size: 13px;
+    color: var(--tfp-dash-muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.tfp-dash-billingcard__status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #7B0F0F;
+}
+
+.tfp-dash-billingcard__status-badge::after {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #7B0F0F;
+}
+
+/* position unpaid badge at card bottom-right */
+.tfp-dash-billingcard__status-badge {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    padding: 8px 12px;
+}
+
+
+
+.tfp-dash-billingcard h3 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.tfp-dash-billingcard__desc {
+    margin: 0;
+    color: var(--tfp-dash-text);
+    line-height: 1.65;
+    max-width: 680px;
+}
+
+.tfp-dash-billingcard__actions {
+    display: flex;
+    align-items: flex-start;
+}
+
+.tfp-dash-billingcard .tfp-dash-btn {
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .tfp-dash-billingcard {
+        grid-template-columns: 1fr;
+    }
+
+    .tfp-dash-billingcard__visual {
+        min-height: 220px;
+    }
+}
+
+.tfp-dash-badge--success {
+    background: rgba(0, 102, 110, .12);
+    color: var(--tfp-dash-teal);
+}
+
+.tfp-dash-financialaid-banner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 28px;
+    border-radius: 12px;
+    background: #EBEFEE;
+}
+
+.tfp-dash-financialaid-banner__visual img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+}
+
+.tfp-dash-financialaid-banner__text h3 {
+    margin: 0 0 8px;
+
+}
+
+.tfp-dash-financialaid-banner__text p {
+    margin: 0 0 16px;
+    color: var(--tfp-dash-muted);
+}
+
+@media (max-width: 900px) {
+    .tfp-dash-financialaid-banner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tfp-dash-financialaid-banner__visual img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.tfp-dash-billing-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-bottom: 24px;
+    padding: 32px;
+    border-radius: 12px;
+    background: #EBEBEB;
+}
+
+.tfp-dash-billing-detail__intro {
+    padding: 0 8px;
+}
+
+.tfp-dash-billing-detail__step {
+    display: inline-flex;
+    margin-bottom: 12px;
+    padding: 10px 16px;
+    background: rgba(0, 102, 110, .1);
+    color: var(--tfp-dash-teal);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.tfp-dash-billing-detail__intro h3 {
+    margin: 0 0 12px;
+    font-size: 30px;
+    line-height: 1.1;
+}
+
+/* .tfp-dash-billing-detail__intro p {
+    margin: 0;
+    color: var(--tfp-dash-muted);
+    font-size: 15px;
+} */
+
+.tfp-dash-billing-detail__grid {
+    display: grid;
+    grid-template-columns: minmax(300px, 380px) minmax(300px, 1fr);
+    gap: 30px;
+    align-items: start;
+}
+
+/* .tfp-dash-billing-detail__card-preview,
+.tfp-dash-billing-detail__form {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 18px 55px rgba(18, 19, 20, .06);
+}
+
+.tfp-dash-billing-detail__card-preview {
+    background: #1B2E35;
+}
+
+.tfp-dash-billing-detail__form {
+    background: #fff;
+    padding: 28px;
+    border: 1px solid rgba(0, 0, 0, .06);
+} */
+
+.tfp-dash-billing-card-visual {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 28px;
+    object-fit: cover;
+}
+
+.tfp-dash-billing-card-visual--image {
+    box-shadow: 0 18px 55px rgba(18, 19, 20, .08);
+}
+
+.tfp-dash-billing-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.tfp-dash-billing-detail__form {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.tfp-dash-billing-detail__form label {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 180%;
+    color: var(--tfp-dash-text);
+    font-family: var(--tfp-dash-font-alt);
+}
+
+/* .tfp-dash-billing-detail__form input {
+    border-radius: 16px;
+    border: 1px solid rgba(42, 53, 62, .12);
+    padding: 16px 18px;
+    font-size: 14px;
+    background: #F7F5F2;
+}
+
+.tfp-dash-billing-detail__form input:focus {
+    outline: none;
+    border-color: var(--tfp-dash-teal);
+    box-shadow: 0 0 0 3px rgba(0, 102, 110, .12);
+} */
+
+.tfp-dash-billing-detail__full-width {
+    grid-column: 1 / -1;
+}
+
+.tfp-dash-billing-detail__form label.tfp-dash-billing-detail__checkbox,
+.tfp-dash-billing-detail__checkbox {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 12px;
+    grid-column: 1 / -1;
+}
+
+.tfp-dash-billing-detail__save {
+    margin-top: 14px;
+    padding: 14px 24px !important;
+    width: fit-content;
+}
+
+.tfp-dash-billing-detail__note {
+    margin: 16px 0 0;
+    color: var(--tfp-dash-muted);
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 680px;
+}
+
+.tfp-dash-billing-detail__next-step {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 20px 0 0;
+    border-top: 1px solid rgba(90, 74, 64, .12);
+}
+
+.tfp-dash-billing-detail__next-step .tfp-dash-btn {
+    border-color: rgba(90, 74, 64, .12);
+}
+
+@media (max-width: 900px) {
+    .tfp-dash-billing-detail__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tfp-dash-billing-detail__form {
+        padding-top: 18px;
+    }
+}
+
+/* Success / info modal (financial aid confirmation) */
+
+.tfp-dash-modal__box--center {
+    text-align: center;
+    max-width: 380px;
+}
+
+.tfp-dash-modal__box--center img {
+    max-height: 60px;
+    margin: 0 auto 12px;
+}
+
+.tfp-dash-modal__box--center h2 {
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+
+.tfp-dash-modal__box--center p {
+    font-size: 13px;
+    color: var(--tfp-dash-muted);
+    margin: 0 0 18px;
+}
+
+@media (max-width: 767px) {
+    .tfp-dash-form__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tfp-dash-form__photo {
+        order: -1;
+    }
+}
+
+.tfp-payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.check-note {
+    font-family: var(--tfp-dash-font);
+    color: var(--tfp-dash-teal);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 130%;
+
+}
+
+/* =========================================================================
+   Profile page (view-mode with per-section inline editing)
+   ========================================================================= */
+
+.tfp-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 30px 30px;
+    margin-bottom: 20px;
+    position: relative;
+    background: #EBEBEB !important;
+}
+
+.tfp-profile-header__avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.tfp-profile-header__avatar img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.tfp-profile-header__avatar-edit {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--tfp-dash-teal);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.tfp-profile-header__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tfp-profile-header__name {
+    font-size: 26px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.tfp-profile-header__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.tfp-profile-header__meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--tfp-dash-muted);
+}
+
+.tfp-profile-header__badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--tfp-dash-teal);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.tfp-profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.tfp-profile-section {
+    padding: 24px 26px;
+}
+
+.tfp-profile-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.tfp-profile-section__header h3 {
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.tfp-profile-section__header .tfp-dash-btn {
+    padding: 7px 14px;
+    font-size: 12px;
+}
+
+.tfp-profile-section__sub {
+    font-size: 12px;
+    color: var(--tfp-dash-muted);
+    margin: 0 0 16px;
+}
+
+.tfp-profile-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--tfp-dash-border);
+    font-size: 13px;
+}
+
+.tfp-profile-row:last-child {
+    border-bottom: 0;
+}
+
+.tfp-profile-row span {
+    color: var(--tfp-dash-muted);
+    font-weight: 600;
+    flex: 0 0 42%;
+}
+
+.tfp-profile-row p {
+    font-weight: 500;
+    text-align: left;
+    flex: 1;
+    font-family: var(--tfp-dash-font);
+    margin-bottom: 0px;
+}
+
+.tfp-profile-section__edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.tfp-profile-section__edit-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.tfp-profile-section__edit-form input[type="text"],
+.tfp-profile-section__edit-form input[type="email"],
+.tfp-profile-section__edit-form input[type="date"] {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--tfp-dash-border);
+    font-family: var(--tfp-dash-font);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.tfp-profile-checkgroup {
+
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+}
+
+.tfp-profile-checkgroup span {
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 130%;
+
+}
+
+.tfp-profile-checkgroup__item {
+    display: flex;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    gap: 8px;
+
+}
+
+.tfp-profile-checkgroup legend {
+    padding: 0;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.tfp-profile-section__edit-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+@media (max-width: 900px) {
+    .tfp-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tfp-profile-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tfp-profile-header__meta {
+        row-gap: 10px;
+    }
+}
+
+/* Payment Details — field-level validation errors */
+.tfp-field-error {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #B3261E;
+    margin-top: -4px;
+}
+
+/* Payment Details — paid-user informational note */
+.tfp-dash-billing-detail__paid-note {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--tfp-dash-muted);
+    padding: 16px;
+    border-radius: 10px;
+    background: rgba(0, 102, 110, .07);
+    border-left: 3px solid var(--tfp-dash-teal);
+    margin-bottom: 4px;
+}
+
+/* Payment Details — field-level validation errors */
+.tfp-field-error {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #B3261E;
+    margin-top: -4px;
+}

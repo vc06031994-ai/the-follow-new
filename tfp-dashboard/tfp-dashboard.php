@@ -73,6 +73,9 @@ require_once TFP_DASH_PATH . 'includes/week/cpt-readings.php';
 require_once TFP_DASH_PATH . 'includes/week/ajax.php';
 require_once TFP_DASH_PATH . 'includes/week/homework-helpers.php';
 require_once TFP_DASH_PATH . 'includes/week/homework-ajax.php';
+require_once TFP_DASH_PATH . 'includes/week/quiz-helpers.php';
+require_once TFP_DASH_PATH . 'includes/week/quiz-ajax.php';
+require_once TFP_DASH_PATH . 'includes/week/quiz-render.php';
 require_once TFP_DASH_PATH . 'includes/page-week.php';
 require_once TFP_DASH_PATH . 'includes/program/helpers.php';
 require_once TFP_DASH_PATH . 'includes/grades/helpers.php';
@@ -256,11 +259,17 @@ add_action('wp_enqueue_scripts', function () {
     if ($template === 'tfp-dashboard-week') {
         wp_enqueue_style('tfp-dashboard-forms', TFP_DASH_URL . 'assets/css/forms.css', ['tfp-dashboard-core'], TFP_DASH_VERSION);
         wp_enqueue_style('tfp-dashboard-week', TFP_DASH_URL . 'assets/css/week.css', ['tfp-dashboard-core', 'tfp-dashboard-forms'], TFP_DASH_VERSION);
+        wp_enqueue_style('tfp-dashboard-week-quiz', TFP_DASH_URL . 'assets/css/week-quiz.css', ['tfp-dashboard-week'], TFP_DASH_VERSION);
         wp_enqueue_script('tfp-dashboard-week', TFP_DASH_URL . 'assets/js/week.js', [], TFP_DASH_VERSION, true);
         wp_enqueue_script('tfp-dashboard-week-homework', TFP_DASH_URL . 'assets/js/week-homework.js', ['tfp-dashboard-week'], TFP_DASH_VERSION, true);
+        wp_enqueue_script('tfp-dashboard-week-quiz', TFP_DASH_URL . 'assets/js/week-quiz.js', ['tfp-dashboard-week'], TFP_DASH_VERSION, true);
         wp_localize_script('tfp-dashboard-week', 'tfpWeekSettings', [
-            'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce'   => wp_create_nonce('tfp_week_nonce'),
+            'ajaxUrl'        => admin_url('admin-ajax.php'),
+            'nonce'          => wp_create_nonce('tfp_week_nonce'),
+            // Quiz tab UI strings (kept here so week-quiz.js stays translation-ready).
+            'networkError'   => __('A network error occurred.', 'tfp-dashboard'),
+            'submittingText' => __('Submitting...', 'tfp-dashboard'),
+            'submitError'    => __('Error submitting quiz.', 'tfp-dashboard'),
         ]);
     }
 

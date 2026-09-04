@@ -121,6 +121,9 @@ function tfp_dashboard_render_week_content()
                 case 'homework':
                     tfp_dashboard_render_week_homework_tab($week, get_current_user_id());
                     break;
+                case 'quiz':
+                    tfp_dashboard_render_week_quiz_tab($week, get_current_user_id());
+                    break;
                 default:
                     tfp_dashboard_render_week_placeholder_tab($active, $labels[$active]);
                     break;

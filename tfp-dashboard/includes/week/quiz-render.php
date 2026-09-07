@@ -88,7 +88,7 @@ function tfp_dashboard_render_week_quiz_tab($week, $user_id)
             </div>
 
             <div class="tfp-quiz-back">
-                <a href="<?php echo esc_url($homework_url); ?>" class="tfp-quiz-back-link">
+                <a href="<?php echo esc_url($homework_url); ?>" class="tfp-dash-btn tfp-dash-btn--primary tfp-quiz-back-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="5" height="8" viewBox="0 0 5 8" fill="none" aria-hidden="true"><path d="M4.93994 0.94L1.88661 4L4.93994 7.06L3.99994 8L-5.88141e-05 4L3.99994 -4.10887e-08L4.93994 0.94Z" fill="currentColor"/></svg>
                     <?php esc_html_e('Back to Homework', 'tfp-dashboard'); ?>
                 </a>

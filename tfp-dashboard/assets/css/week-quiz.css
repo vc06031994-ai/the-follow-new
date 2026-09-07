@@ -2,8 +2,11 @@
    TFP Dashboard — Week → Quiz tab
    Layout + colors decoded from the Figma quiz screens:
 
-     - Centered column (~803px), no sidebar.
-     - Start screen is a plain centered intro (no card).
+     - Full-width column, no sidebar. The light-blue card (~803px) centers
+       itself inside it; the start screen, the "Date completed" row and the
+       "Review Answers:" heading sit outside the card, at the content edges.
+     - Start screen is a plain centered intro (no card) with the
+       "Back to Homework" button at the bottom-left.
      - Question / Result / Review states sit inside a white card with a
        1px light-blue border (#D3E1F7) and soft rounded corners.
      - Gold #847230 (.tfp-reded-btn)  = primary actions (Start, Next,
@@ -14,9 +17,10 @@
      - Red #570506 = "Incorrect" colour and the failed badge.
    ========================================================================= */
 
+/* Full-width column: the start screen, the "Date completed" row and the
+   "Review Answers:" heading align to the content edges, while the carded
+   states center themselves at 803px (see .tfp-quiz-card). */
 .tfp-week__quiz {
-    max-width: 803px;
-    margin: 0 auto;
     padding: 12px 0 24px;
 }
 
@@ -28,23 +32,30 @@
     display: none !important;
 }
 
-/* White card with the light-blue Figma frame. */
+/* White card with the light-blue Figma frame; centers itself inside the
+   full-width quiz column. */
 .tfp-quiz-card {
     background: #fff;
     border: 1px solid #D3E1F7;
     border-radius: 10px;
     padding: 44px 56px;
+    max-width: 803px;
+    margin: 0 auto;
 }
 
 @media (max-width: 767px) {
     .tfp-quiz-card {
         padding: 28px 22px;
     }
+
+    .tfp-quiz-back {
+        margin-top: 56px;
+    }
 }
 
-/* Shared headings / text */
+/* Shared headings / text — 32px matches the page-header title size. */
 .tfp-quiz-title {
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 800;
     line-height: 120%;
     color: #101011;
@@ -66,7 +77,7 @@
 
 .tfp-quiz-details {
     display: inline-block;
-    text-align: left;
+    text-align: center;
     margin: 0 auto 28px;
 }
 
@@ -84,36 +95,21 @@
     font-size: 15px;
     line-height: 170%;
     color: #101011;
+    text-align: center;
 }
 
-.tfp-quiz-details__list li {
-    padding-left: 16px;
-    position: relative;
-}
-
+/* Center-aligned bullets: the "·" travels with each centered line. */
 .tfp-quiz-details__list li::before {
     content: "·";
-    position: absolute;
-    left: 2px;
     font-weight: 700;
+    margin-right: 7px;
 }
 
+/* Bottom-LEFT, Figma match: the teal secondary button hugs the content's
+   left edge, well below the centered Start Quiz button. */
 .tfp-quiz-back {
-    margin-top: 44px;
-}
-
-.tfp-quiz-back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--tfp-dash-teal);
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.tfp-quiz-back-link:hover {
-    text-decoration: underline;
+    margin-top: 120px;
+    text-align: left;
 }
 
 /* ----------------------------------- QUESTION -------------------------- */
@@ -177,11 +173,12 @@
     text-align: center;
 }
 
+/* Right-aligns to the content edge of the full-width quiz column (Figma). */
 .tfp-quiz-result__date {
     text-align: right;
     font-size: 13px;
     color: #6D6C6A;
-    margin: 0 0 14px;
+    margin: 0 0 24px;
 }
 
 .tfp-quiz-result__sub {
@@ -197,9 +194,8 @@
     margin: 0 0 18px;
 }
 
+/* Bullets center-aligned like the start screen (Figma). */
 .tfp-quiz-result__list {
-    display: inline-block;
-    text-align: left;
     margin: 0 0 24px;
 }
 
